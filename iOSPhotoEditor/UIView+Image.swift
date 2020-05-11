@@ -14,7 +14,7 @@ extension UIView {
      */
     func toImage(size: CGSize?) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size ?? self.bounds.size, self.isOpaque, 0.0)
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        self.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y:0), size: size ?? self.bounds.size), afterScreenUpdates: false)
         let snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return snapshotImageFromMyView!
