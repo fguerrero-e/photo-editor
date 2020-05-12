@@ -82,11 +82,11 @@ extension PhotoEditorViewController {
     //MARK: Bottom Toolbar
     
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
-        UIImageWriteToSavedPhotosAlbum(canvasView.toImage(size: self.image?.size, scale: self.image?.scale),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(toImage(),self, #selector(PhotoEditorViewController.image(_:withPotentialError:contextInfo:)), nil)
     }
     
     @IBAction func shareButtonTapped(_ sender: UIButton) {
-        let activity = UIActivityViewController(activityItems: [canvasView.toImage(size: self.image?.size, scale: self.image?.scale)], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [toImage()], applicationActivities: nil)
         present(activity, animated: true, completion: nil)
         
     }
@@ -101,11 +101,22 @@ extension PhotoEditorViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let img = self.canvasView.toImage(size: self.image?.size, scale: self.image?.scale)
-        photoEditorDelegate?.doneEditing(image: img)
+        photoEditorDelegate?.doneEditing(image: toImage())
         self.dismiss(animated: true, completion: nil)
     }
 
+    func toImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.image!.size, false, self.image!.scale)
+        self.image!.draw(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size))
+        for view in self.canvasView.subviews{
+            if ( view != self.imageView ){
+                view.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size), afterScreenUpdates: false)
+            }
+        }
+        let snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapshotImageFromMyView!
+    }
     //MAKR: helper methods
     
     @objc func image(_ image: UIImage, withPotentialError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
