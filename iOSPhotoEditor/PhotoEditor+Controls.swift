@@ -106,15 +106,18 @@ extension PhotoEditorViewController {
     }
 
     func toImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.image!.size, false, self.image!.scale)
-        self.image!.draw(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size))
-        for view in self.canvasView.subviews{
-            if ( view != self.imageView ){
-                view.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size), afterScreenUpdates: false)
+        var snapshotImageFromMyView : UIImage?
+        autoreleasepool {
+            UIGraphicsBeginImageContextWithOptions(self.image!.size, false, self.image!.scale)
+            self.image!.draw(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size))
+            for view in self.canvasView.subviews{
+                if ( view != self.imageView ){
+                    view.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size), afterScreenUpdates: false)
+                }
             }
+            snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
         }
-        let snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         return snapshotImageFromMyView!
     }
     //MAKR: helper methods

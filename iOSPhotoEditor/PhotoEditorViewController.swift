@@ -113,7 +113,8 @@ public final class PhotoEditorViewController: UIViewController {
         layout.minimumLineSpacing = 0
         colorsCollectionView.collectionViewLayout = layout
         colorsCollectionViewDelegate = ColorsCollectionViewDelegate()
-        colorsCollectionViewDelegate.colorDelegate = self
+        weak var controller = self;
+        colorsCollectionViewDelegate.colorDelegate = controller
         if !colors.isEmpty {
             colorsCollectionViewDelegate.colors = colors
         }
