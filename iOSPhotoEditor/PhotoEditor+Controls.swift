@@ -108,11 +108,15 @@ extension PhotoEditorViewController {
     func toImage() -> UIImage {
         var snapshotImageFromMyView : UIImage?
         autoreleasepool {
-            UIGraphicsBeginImageContextWithOptions(self.image!.size, false, self.image!.scale)
-            self.image!.draw(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size))
+            UIGraphicsBeginImageContextWithOptions(self.imageView.image!.size, false, self.imageView.image!.scale)
+            self.imageView.image!.draw(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.imageView.image!.size))
+            let context = UIGraphicsGetCurrentContext()!
+            let x = self.imageView.image!.size.width / self.canvasView.bounds.width
+            let y = self.imageView.image!.size.height / self.canvasView.bounds.height
+            context.scaleBy(x: x, y: y)
             for view in self.canvasView.subviews{
                 if ( view != self.imageView ){
-                    view.drawHierarchy(in: CGRect(origin: CGPoint(x: 0, y:0), size: self.image!.size), afterScreenUpdates: false)
+                    view.layer.render(in: context)
                 }
             }
             snapshotImageFromMyView = UIGraphicsGetImageFromCurrentImageContext()
@@ -120,6 +124,7 @@ extension PhotoEditorViewController {
         }
         return snapshotImageFromMyView!
     }
+
     //MAKR: helper methods
     
     @objc func image(_ image: UIImage, withPotentialError error: NSErrorPointer, contextInfo: UnsafeRawPointer) {
