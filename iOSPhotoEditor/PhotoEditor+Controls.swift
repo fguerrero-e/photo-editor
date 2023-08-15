@@ -26,7 +26,7 @@ extension PhotoEditorViewController {
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         photoEditorDelegate?.canceledEditing()
-        self.dismiss(animated: true, completion: nil)
+        // Dismiss Editor in Delegate
     }
 
     @IBAction func cropButtonTapped(_ sender: UIButton) {
@@ -102,7 +102,7 @@ extension PhotoEditorViewController {
     
     @IBAction func continueButtonPressed(_ sender: Any) {
         photoEditorDelegate?.doneEditing(image: toImage())
-        self.dismiss(animated: true, completion: nil)
+        // Dismiss Editor in Delegate
     }
 
     func toImage() -> UIImage {
