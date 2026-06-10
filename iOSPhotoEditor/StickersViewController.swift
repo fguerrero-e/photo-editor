@@ -67,7 +67,7 @@ class StickersViewController: UIViewController, UIGestureRecognizerDelegate {
         collectioView.dataSource = self
         
         collectioView.register(
-            UINib(nibName: "StickerCollectionViewCell", bundle: .module),
+            StickerCollectionViewCell.self,
             forCellWithReuseIdentifier: "StickerCollectionViewCell")
         
         //-----------------------------------
@@ -90,7 +90,7 @@ class StickersViewController: UIViewController, UIGestureRecognizerDelegate {
         emojisCollectioView.dataSource = emojisDelegate
         
         emojisCollectioView.register(
-            UINib(nibName: "EmojiCollectionViewCell", bundle: .module),
+            EmojiCollectionViewCell.self,
             forCellWithReuseIdentifier: "EmojiCollectionViewCell")
         
     }

@@ -12,11 +12,8 @@ let package = Package(
             name: "iOSPhotoEditor",
             path: "iOSPhotoEditor",
             resources: [
-                .process("PhotoEditorViewController.xib"),
-                .process("ColorCollectionViewCell.xib"),
-                .process("EmojiCollectionViewCell.xib"),
-                .process("StickerCollectionViewCell.xib"),
-                .process("StickersViewController.xib"),
+                .copy("PhotoEditorViewController.xib"),
+                .copy("StickersViewController.xib"),
                 .process("LaunchScreen.storyboard"),
                 .process("PhotoCropEditorBorder.png"),
                 .process("PhotoCropEditorBorder@2x.png"),

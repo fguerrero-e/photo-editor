@@ -48,7 +48,7 @@ The **Example** project in this repository uses a local package reference for de
 The `PhotoEditorViewController`.
 
 ```swift
-let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .PhotoEditor.module)
+let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .iOSPhotoEditor.module)
 
 //PhotoEditorDelegate
 photoEditor.photoEditorDelegate = self

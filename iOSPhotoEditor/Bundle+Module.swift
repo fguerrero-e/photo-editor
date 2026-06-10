@@ -5,9 +5,9 @@ public extension Bundle {
     ///
     /// Use when presenting ``PhotoEditorViewController`` from a consuming app:
     /// ```swift
-    /// PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .PhotoEditor.module)
+    /// PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .iOSPhotoEditor.module)
     /// ```
-    enum PhotoEditor {
+    enum iOSPhotoEditor {
         public static let module = Bundle.module
     }
 }

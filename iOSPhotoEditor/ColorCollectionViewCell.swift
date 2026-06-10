@@ -9,13 +9,31 @@
 import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var colorView: UIView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+    let colorView = UIView()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
     }
-    
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews()
+    }
+
+    private func setupViews() {
+        colorView.translatesAutoresizingMaskIntoConstraints = false
+        colorView.backgroundColor = .white
+        contentView.addSubview(colorView)
+        NSLayoutConstraint.activate([
+            colorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            colorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            colorView.widthAnchor.constraint(equalToConstant: 20),
+            colorView.heightAnchor.constraint(equalToConstant: 20),
+        ])
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
         colorView.layer.cornerRadius = colorView.frame.width / 2
@@ -23,22 +41,20 @@ class ColorCollectionViewCell: UICollectionViewCell {
         colorView.layer.borderWidth = 1.0
         colorView.layer.borderColor = UIColor.white.cgColor
     }
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                let previouTransform =  colorView.transform
+                let previouTransform = colorView.transform
                 UIView.animate(withDuration: 0.2,
                                animations: {
                                 self.colorView.transform = self.colorView.transform.scaledBy(x: 1.3, y: 1.3)
                 },
                                completion: { _ in
                                 UIView.animate(withDuration: 0.2) {
-                                    self.colorView.transform  = previouTransform
+                                    self.colorView.transform = previouTransform
                                 }
                 })
-            } else {
-                // animate deselection
             }
         }
     }

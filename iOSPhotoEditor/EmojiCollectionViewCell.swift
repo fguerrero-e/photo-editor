@@ -10,10 +10,26 @@ import UIKit
 
 class EmojiCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var emojiLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    let emojiLabel = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
     }
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews()
+    }
+
+    private func setupViews() {
+        emojiLabel.translatesAutoresizingMaskIntoConstraints = false
+        emojiLabel.textAlignment = .center
+        emojiLabel.font = .systemFont(ofSize: 60)
+        contentView.addSubview(emojiLabel)
+        NSLayoutConstraint.activate([
+            emojiLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            emojiLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+        ])
+    }
 }

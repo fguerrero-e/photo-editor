@@ -101,8 +101,16 @@ public final class PhotoEditorViewController: UIViewController {
         
         
         configureCollectionView()
+        GradientOverlay.apply(to: topGradient, fromTop: true)
+        GradientOverlay.apply(to: bottomGradient, fromTop: false)
         stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: .module)
         hideControls()
+    }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        GradientOverlay.updateLayout(for: topGradient)
+        GradientOverlay.updateLayout(for: bottomGradient)
     }
     
     func configureCollectionView() {
@@ -121,7 +129,7 @@ public final class PhotoEditorViewController: UIViewController {
         colorsCollectionView.dataSource = colorsCollectionViewDelegate
         
         colorsCollectionView.register(
-            UINib(nibName: "ColorCollectionViewCell", bundle: .module),
+            ColorCollectionViewCell.self,
             forCellWithReuseIdentifier: "ColorCollectionViewCell")
     }
     

@@ -29,10 +29,11 @@ extension ViewController: PhotoEditorDelegate {
     
     func doneEditing(image: UIImage) {
         imageView.image = image
+        dismiss(animated: true)
     }
     
     func canceledEditing() {
-        print("Canceled")
+        dismiss(animated: true)
     }
 }
 
@@ -51,7 +52,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         picker.dismiss(animated: true, completion: nil)
         
         
-        let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .PhotoEditor.module)
+        let photoEditor = PhotoEditorViewController(nibName: "PhotoEditorViewController", bundle: .iOSPhotoEditor.module)
         photoEditor.photoEditorDelegate = self
         photoEditor.image = image
         //Colors for drawing and Text, If not set default values will be used
