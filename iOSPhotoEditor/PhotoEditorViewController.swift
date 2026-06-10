@@ -101,7 +101,7 @@ public final class PhotoEditorViewController: UIViewController {
         
         
         configureCollectionView()
-        stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: Bundle(for: StickersViewController.self))
+        stickersViewController = StickersViewController(nibName: "StickersViewController", bundle: .module)
         hideControls()
     }
     
@@ -121,7 +121,7 @@ public final class PhotoEditorViewController: UIViewController {
         colorsCollectionView.dataSource = colorsCollectionViewDelegate
         
         colorsCollectionView.register(
-            UINib(nibName: "ColorCollectionViewCell", bundle: Bundle(for: ColorCollectionViewCell.self)),
+            UINib(nibName: "ColorCollectionViewCell", bundle: .module),
             forCellWithReuseIdentifier: "ColorCollectionViewCell")
     }
     
